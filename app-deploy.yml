@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: mraidiachref/solar-system:latest   
+        image: mraidiachref/solar-system:7197ba0bcc097a293afb03e8b4cff1314913cb38
         ports:
         - containerPort: 3000
 ---
