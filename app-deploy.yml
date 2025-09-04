@@ -4,6 +4,7 @@ metadata:
   name: frontend
   labels:
     app: frontend
+  namespace: solar-system
 spec:
   replicas: 2
   selector:
@@ -14,11 +15,15 @@ spec:
       labels:
         app: frontend
     spec:
+      serviceAccountName: solar-system-sa
       containers:
       - name: frontend
         image: mraidiachref/solar-system:latest   
         ports:
         - containerPort: 3000
+        envFrom:
+          - secretRef:
+            name: solar-system-secrets
 ---
 apiVersion: v1
 kind: Service
