@@ -2,9 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+  namespace: solar-system
   labels:
     app: frontend
-  namespace: solar-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   replicas: 2
   selector:
@@ -17,24 +19,10 @@ spec:
     spec:
       serviceAccountName: solar-system-sa
       containers:
-      - name: frontend
-        image: mraidiachref/solar-system:81337982f259bf05f1fca2497efe2a0a9c968f45
-        ports:
-        - containerPort: 3000
-        envFrom:
-          - secretRef:
-            name: solar-system-secrets
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend-service
-  labels:
-    app: frontend
-spec:
-  type: LoadBalancer
-  selector:
-    app: frontend
-  ports:
-  - port: 80
-    targetPort: 3000
+        - name: frontend
+          image: mraidiachref/solar-system:81337982f259bf05f1fca2497efe2a0a9c968f45
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: solar-system-secrets
