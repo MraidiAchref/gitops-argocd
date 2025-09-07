@@ -20,7 +20,7 @@ spec:
       serviceAccountName: solar-system-sa
       containers:
         - name: frontend
-          image: mraidiachref/solar-system:1c08c2abb063d33d73b49e71c289f911a6277b6a
+          image: mraidiachref/solar-system:e522784cb62a8dc856e88c486ef6cc092024768f
           ports:
             - containerPort: 3000
           envFrom:
